@@ -51,7 +51,6 @@ const addProduct = async (req, res) => {
             success: true,
             message: "Product Added Sucessfully",
         });
-        
     } catch (error) {
         console.log(error);
         res.json({
@@ -62,10 +61,57 @@ const addProduct = async (req, res) => {
     }
 };
 
-const listProducts = async (req, res) => {};
+const listProducts = async (req, res) => {
+    try {
+        const products = await ProductModel.find({});
+        res.json({
+            success: true,
+            products,
+        });
+    } catch (error) {
+        (console.log(error),
+            res.json({
+                success: false,
+                message: "Error in List of all products API",
+                error,
+            }));
+    }
+};
 
-const removeProduct = async (req, res) => {};
+const removeProduct = async (req, res) => {
+    try {
+        await ProductModel.findByIdAndDelete(req.body.id);
+        res.json({
+            success: true,
+            message: "Product Removed Successfully",
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success: false,
+            message: "Error in Delete a product API",
+            error,
+        });
+    }
+};
 
-const singleProduct = async (req, res) => {};
+const singleProductInfo = async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const product = await ProductModel.findById(productId);
+        res.json({
+            success: true,
+            message: "Product retrieved succesfully",
+            product,
+        });
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success: false,
+            message: "Error in Get Single Product API",
+            error,
+        });
+    }
+};
 
-export { addProduct, listProducts, removeProduct, singleProduct };
+export { addProduct, listProducts, removeProduct, singleProductInfo };

@@ -4,7 +4,7 @@ import {
     addProduct,
     listProducts,
     removeProduct,
-    singleProduct,
+    singleProductInfo,
 } from "../controllers/productController.js";
 import upload from "../middlewares/multer.js";
 
@@ -20,8 +20,8 @@ productRouter.post(
     ]),
     addProduct,
 );
-productRouter.post("/remove", removeProduct);
-productRouter.post("/single", singleProduct);
-productRouter.post("/list", listProducts);
+productRouter.delete("/remove", removeProduct);
+productRouter.get("/single", singleProductInfo);
+productRouter.get("/list", listProducts);
 
 export default productRouter;

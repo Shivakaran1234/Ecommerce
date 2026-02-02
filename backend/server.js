@@ -16,9 +16,9 @@ app.use(cors());
 
 // API End Points
 app.get("/", (req, res) => {
-  res.send("API working");
+    res.send("API working");
 });
 
 app.listen(port, () => {
-  console.log("Server started on port : " + port);
+    console.log("Server started on port : " + port);
 });
